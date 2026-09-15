@@ -1,6 +1,5 @@
 /* =========================================================================
    DIRT project page — styles
-   System-font stack (no web-font fetch) for fast loading + accessibility.
    ========================================================================= */
 
 :root {
@@ -193,7 +192,7 @@ figcaption { color: var(--muted); font-size: .9rem; margin-top: .7rem; text-alig
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); overflow: hidden;
 }
-.video-card video { width: 100%; background: #000; aspect-ratio: 16 / 9; object-fit: cover; }
+.video-card video { width: 100%; height: auto; display: block; background: #000; aspect-ratio: 16 / 9; object-fit: contain; }
 .video-card .meta { padding: 1rem 1.2rem 1.2rem; }
 .video-card h3 { margin-bottom: .25rem; }
 .video-card p { margin: 0; color: var(--muted); font-size: .93rem; }
