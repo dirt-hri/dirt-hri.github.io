@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIRT — Data-Integrated Robot Therapy</title>
+  <meta name="description"
+        content="DIRT: a data-integrated system for robot-assisted therapy that unifies supervision, gameplay interaction, and synchronized multimodal session management." />
+  <link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#abstract">Skip to content</a>
+
+  <!-- Navigation ------------------------------------------------------- -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a class="brand" href="#top">DIRT</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links"
+              aria-label="Toggle navigation menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#contributions">System</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#bibtex">Citation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero ------------------------------------------------------------- -->
+  <header class="hero" id="top">
+    <div class="wrap">
+      <h1>
+        <span class="acronym">DIRT</span>: Data-Integrated Robot Therapy for
+        Real-Time Gameplay Interaction, Supervision, and Multimodal
+        Session Management
+      </h1>
+      <p class="subtitle">
+        A session-centered web system for robot-assisted therapy that unifies
+        non-intrusive supervision, game-based robot interaction, and
+        synchronized multimodal session capture.
+      </p>
+
+      <p class="authors">Authors withheld for double-blind review</p>
+      <p class="affil">Affiliation withheld for double-blind review</p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="#videos">▶ Watch videos</a>
+        <a class="btn btn-ghost" href="#abstract">Read overview</a>
+        <span class="btn" aria-disabled="true"
+              title="Source code will be released upon publication">Code — upon publication</span>
+      </div>
+
+      <figure class="hero-figure fade-in">
+        <img src="static/images/motivation.jpg" width="1000"
+             alt="A child seated at a table interacts with a robot manipulator and a physical tic-tac-toe board during a DIRT session." />
+        <figcaption>
+          A user interacting with DIRT, a platform for studying child–robot
+          social interaction through turn-based gameplay.
+        </figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Abstract ------------------------------------------------------- -->
+    <section id="abstract">
+      <div class="wrap">
+        <h2>Overview</h2>
+        <p class="lead">
+          We present <strong>DIRT</strong>, a data-integrated system for
+          robot-assisted therapy that unifies supervision, gameplay
+          interaction, and multimodal session management within a single
+          session-centered architecture.
+        </p>
+        <p>
+          Unlike workflows that require clinicians to operate separate tools
+          for monitoring, gameplay interaction, and post-session review, DIRT
+          maintains a shared web session state across four integrated modules:
+          authenticated, role-based dashboards for non-intrusive supervision;
+          a game-based interaction framework coordinating voice guidance,
+          robot motion, and real-time game state; synchronized capture of
+          robot motion, robot vision, participant video, and game state; and a
+          post-session feedback module that collects structured feedback from
+          the participant after a session ends.
+        </p>
+        <p>
+          We evaluate system performance in a physics-based robotic simulator
+          and demonstrate the system in real-world gameplay sessions with
+          15 children ages 5 to 12, assessing its latency, multimodal data
+          capture and storage cost, and adaptive difficulty mechanism.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contributions / modules --------------------------------------- -->
+    <section id="contributions">
+      <div class="wrap">
+        <h2>Four integrated modules</h2>
+        <p class="lead">
+          DIRT runs entirely in a web browser and can launch, monitor, and
+          record a session from any device on the local network — no
+          client-side installation or robotics expertise required.
+        </p>
+        <div class="grid-2">
+          <article class="card fade-in">
+            <span class="num" aria-hidden="true">1</span>
+            <h3>Role-based supervision</h3>
+            <p>
+              Authenticated dashboards enforce least-privilege access for
+              administrators, professionals, and participants. A single
+              workspace consolidates live camera feeds, a URDF-based 3D robot
+              view, and the game board for non-intrusive observation.
+            </p>
+          </article>
+          <article class="card fade-in">
+            <span class="num" aria-hidden="true">2</span>
+            <h3>Game-based interaction</h3>
+            <p>
+              A turn-based framework coordinates voice guidance, robot pick-and-place
+              motion, and real-time game state. A camera-based perception module
+              validates each participant move before the robot responds.
+            </p>
+          </article>
+          <article class="card fade-in">
+            <span class="num" aria-hidden="true">3</span>
+            <h3>Synchronized multimodal data capture</h3>
+            <p>
+              Robot motion, robot vision, participant video, and game events are
+              captured automatically on a shared, time-synchronized pipeline —
+              kept off the interaction path so logging never delays turn-taking.
+            </p>
+          </article>
+          <article class="card fade-in">
+            <span class="num" aria-hidden="true">4</span>
+            <h3>Post-session feedback</h3>
+            <p>
+              After a session ends, a structured questionnaire collects the
+              participant's impressions while the experience is still fresh,
+              linked to the session's objective multimodal record.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture --------------------------------------------------- -->
+    <section id="architecture">
+      <div class="wrap">
+        <h2>System architecture</h2>
+        <p class="lead">
+          DIRT follows a three-tier architecture — a frontend of role-scoped
+          dashboards, a backend computational core, and a database and
+          file-storage layer — designed for real-time robot-mediated sessions.
+        </p>
+        <figure class="figure-block fade-in">
+          <img src="static/images/architecture.png"
+               alt="Block diagram of the three-tier DIRT architecture: frontend dashboards, a backend sensor module with interaction logic and robot control, and a database and file storage layer, connected by data flows." />
+          <figcaption>
+            The DIRT three-tier architecture connecting the frontend
+            dashboards, backend interaction logic and robot control, and the
+            database and file-storage layer.
+          </figcaption>
+        </figure>
+        <figure class="figure-block fade-in">
+          <img src="static/images/ui_combined.png"
+               alt="Screenshots of the DIRT web interface, including sign-up and sign-in forms, administrator pages, the session management page, the live session page with camera feed, 3D robot viewer and difficulty slider, the session-log replay page, and the post-session feedback page." />
+          <figcaption>
+            The DIRT web interface: authentication, administrator pages,
+            session management, the live session view, synchronized session-log
+            replay, and the post-session feedback questionnaire.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Videos --------------------------------------------------------- -->
+    <section id="videos">
+      <div class="wrap">
+        <h2>Videos</h2>
+        <p class="lead">
+          Recordings from simulated and real-world DIRT sessions. Press play on
+          any clip — videos load only when requested to keep the page fast.
+        </p>
+        <div class="video-stack">
+
+          <article class="video-card fade-in">
+            <video controls preload="none" playsinline
+                   poster="static/images/motivation.jpg">
+              <source src="static/videos/v1-dashboard-gameplay.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="meta">
+              <span class="tag pending">Dashboard + gameplay · placeholder</span>
+              <h3>Dashboard walkthrough with real gameplay</h3>
+              <p>
+                The dashboard from login through the session monitoring page,
+                shown side by side with a real-world gameplay session.
+                Final collaged video coming soon.
+              </p>
+            </div>
+          </article>
+
+          <article class="video-card fade-in">
+            <video controls preload="none" playsinline
+                   poster="static/images/ui_combined.png">
+              <source src="static/videos/v2-dashboard-simulation.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="meta">
+              <span class="tag pending">Dashboard + simulation · placeholder</span>
+              <h3>Dashboard with the CoppeliaSim scene</h3>
+              <p>
+                The dashboard from the session management page through the
+                session monitoring page, shown side by side with the
+                CoppeliaSim simulation scene. Final collaged video coming soon.
+              </p>
+            </div>
+          </article>
+
+          <article class="video-card fade-in">
+            <video controls preload="none" playsinline
+                   poster="static/images/ui_combined.png">
+              <source src="static/videos/v3-post-session.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="meta">
+              <span class="tag pending">Post-session · placeholder</span>
+              <h3>Post-session review</h3>
+              <p>
+                Replaying a completed session — synchronized camera, robot
+                state, board updates, and the event timeline — together with the
+                post-session feedback questionnaire. Final video coming soon.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -------------------------------------------------------- -->
+    <section id="results">
+      <div class="wrap">
+        <h2>Results</h2>
+
+        <div class="stats">
+          <div class="stat fade-in">
+            <div class="big">~430x</div>
+            <div class="lbl">faster joint-command retrieval vs. online IK over a full turn</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="big">16.56 MB</div>
+            <div class="lbl">average data per session (96.7% video)</div>
+          </div>
+          <div class="stat fade-in">
+            <div class="big">2.89 kB</div>
+            <div class="lbl">structured session data — a queryable history at negligible cost</div>
+          </div>
+        </div>
+
+        <h3>Robot motion planning and execution</h3>
+        <p>
+          Precomputed joint commands are retrieved from a database instead of
+          solving inverse kinematics online. Over a complete pick-and-place turn,
+          database retrieval is roughly 430x faster than the IKPy solver, with
+          constant latency, while adding negligible time against the physical
+          execution of the turn.
+        </p>
+        <div class="table-wrap fade-in">
+          <table class="data-table">
+            <caption>
+              Planning latency and execution time for one pick-and-place turn
+              over 10 sessions (total 34 turns). Values are mean ± standard
+              deviation in seconds; each planning column carries its own
+              power-of-ten factor. Gripper actions are end-effector commands and
+              compute no joint angles.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" class="text" rowspan="2">Robot behavior</th>
+                <th scope="colgroup" colspan="2">Planning time <span class="factor">(s)</span></th>
+                <th scope="col" rowspan="2">Robot exec. <span class="factor">(s)</span></th>
+              </tr>
+              <tr>
+                <th scope="col">DIRT <span class="factor">(x10⁻⁴&nbsp;s)</span></th>
+                <th scope="col">IKPy <span class="factor">(x10⁻¹&nbsp;s)</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th colspan="4" scope="colgroup" class="grouphdr">Pickup</th></tr>
+              <tr><th scope="row">Move above piece</th><td>4.02 ± 13.04</td><td>1.63 ± 1.35</td><td>4.87 ± 0.31</td></tr>
+              <tr><th scope="row">Open gripper</th><td>—</td><td>—</td><td>0.30 ± 0.003</td></tr>
+              <tr><th scope="row">Descend to grip</th><td>1.52 ± 1.59</td><td>1.36 ± 0.88</td><td>1.69 ± 0.02</td></tr>
+              <tr><th scope="row">Close gripper</th><td>—</td><td>—</td><td>0.31 ± 0.006</td></tr>
+              <tr><th scope="row">Return above piece</th><td>2.29 ± 3.79</td><td>1.36 ± 0.99</td><td>1.69 ± 0.02</td></tr>
+
+              <tr><th colspan="4" scope="colgroup" class="grouphdr">Place</th></tr>
+              <tr><th scope="row">Move above board cell</th><td>3.94 ± 12.13</td><td>1.35 ± 0.96</td><td>4.71 ± 0.93</td></tr>
+              <tr><th scope="row">Descend to drop</th><td>3.71 ± 10.61</td><td>1.23 ± 0.68</td><td>1.68 ± 0.02</td></tr>
+              <tr><th scope="row">Open gripper</th><td>—</td><td>—</td><td>0.30 ± 0.004</td></tr>
+              <tr><th scope="row">Return above board cell</th><td>4.26 ± 16.87</td><td>1.54 ± 1.31</td><td>1.69 ± 0.02</td></tr>
+
+              <tr class="total"><th scope="row">Complete turn</th><td>19.74 ± 58.03</td><td>8.47 ± 6.17</td><td>17.24 ± 1.33</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Session data volume</h3>
+        <p>
+          A recorded session averages 16.56 MB. Participant video dominates the
+          footprint (96.7%), while the complete queryable relational record
+          occupies only 2.89 kB — so the queryable history of roughly 5,500
+          sessions fits in the space of one session's video.
+        </p>
+        <div class="table-wrap fade-in">
+          <table class="data-table">
+            <caption>Data volume averaged across 10 sessions.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="text">Record</th>
+                <th scope="col">Count</th>
+                <th scope="col">Storage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Robot joint state (rosbag)</th><td>1,036.1 messages</td><td>272.8 kB</td></tr>
+              <tr><th scope="row">Joint states (derived NDJSON)</th><td>1 file</td><td>274.6 kB</td></tr>
+              <tr><th scope="row">Participant video @ 30 fps</th><td>2,938 frames</td><td>16.01 MB</td></tr>
+              <tr><th scope="row">Activity events</th><td>8 rows</td><td>1.4 kB</td></tr>
+              <tr><th scope="row">Activity instances</th><td>1 row</td><td>205 B</td></tr>
+              <tr><th scope="row">Media descriptors</th><td>2 rows</td><td>1.2 kB</td></tr>
+              <tr><th scope="row">Session metadata</th><td>1 row</td><td>80 B</td></tr>
+              <tr class="total"><th scope="row">Session total</th><td>—</td><td>16.56 MB</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Adaptive difficulty</h3>
+        <p>
+          DIRT implements tic-tac-toe with a continuous difficulty parameter
+          <em>d</em>: at each turn the robot plays the optimal (minimax) move
+          with probability <em>d</em> and a random valid move otherwise. Across
+          a full difficulty sweep against an expert opponent, outcomes shift
+          predictably — from a 96.8% human win rate at <em>d</em>&nbsp;=&nbsp;0.0
+          to entirely drawn games at <em>d</em>&nbsp;=&nbsp;1.0.
+        </p>
+        <figure class="figure-block fade-in">
+          <img src="static/images/difficulty.png"
+               alt="Chart showing human win rate decreasing and draw rate increasing as the difficulty parameter rises from 0 to 1, with game length growing correspondingly." />
+          <figcaption>
+            Game outcomes and game length shift systematically with the
+            difficulty parameter, averaged across all nine opening cells.
+          </figcaption>
+        </figure>
+
+        <h3>Child-robot Social Interaction study</h3>
+        <p>
+          15 children ages 5 to 12 each played tic-tac-toe with the robot at
+          three difficulty settings (<em>d</em>&nbsp;=&nbsp;0.0, 0.5, and 1.0).
+          Afterwards they completed a 13-question, age-appropriate questionnaire
+          on a five-point Likert scale covering comprehension, timing, usability,
+          perceived correctness, and engagement. Participants generally found
+          the interaction understandable, responsive, usable, and engaging:
+          all 15 players reported the robot did not make them wait too long and
+          felt good playing with the robot, and 14 (93.3%) found the
+          interaction fun.
+        </p>
+        <p>
+          Difficulty preferences varied across participants — 4, 1, and 7
+          children preferred <em>d</em>&nbsp;=&nbsp;0.0, 0.5, and 1.0
+          respectively — supporting a configurable difficulty level within a
+          consistent interaction workflow.
+        </p>
+        <figure class="figure-block fade-in">
+          <img src="static/images/likert.png"
+               alt="Stacked bar chart of five-point Likert responses for 15 players across the 13 questionnaire items, each bar segment labeled with the number of responses and ordered from strongly disagree to strongly agree." />
+          <ul class="likert-legend" aria-label="Response colour key">
+            <li><i style="background:#B2182B"></i> strongly disagree</li>
+            <li><i style="background:#EF8A62"></i> disagree</li>
+            <li><i style="background:#D9D9D9"></i> not sure</li>
+            <li><i style="background:#67A9CF"></i> agree</li>
+            <li><i style="background:#2166AC"></i> strongly agree</li>
+          </ul>
+          <figcaption>
+            Per-question response distributions for 15 players, pooled across
+            age bands. Rows are numbered 1-13 to match the questionnaire items
+            below.
+          </figcaption>
+        </figure>
+
+        <div class="table-wrap fade-in">
+          <table class="data-table qtable">
+            <caption>The 13 questionnaire items answered by players, grouped by the construct they measure.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="text">#</th>
+                <th scope="col" class="text">Questionnaire item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th colspan="2" scope="colgroup" class="grouphdr">Comprehension</th></tr>
+              <tr><td class="qnum">1</td><td>Knew what the robot did</td></tr>
+              <tr><td class="qnum">2</td><td>Knew when it was the robot's turn</td></tr>
+              <tr><td class="qnum">3</td><td>Knew when it was my turn</td></tr>
+
+              <tr><th colspan="2" scope="colgroup" class="grouphdr">Timing</th></tr>
+              <tr><td class="qnum">4</td><td>Robot did not make me wait too long</td></tr>
+              <tr><td class="qnum">5</td><td>Robot moved at the right time</td></tr>
+
+              <tr><th colspan="2" scope="colgroup" class="grouphdr">Usability</th></tr>
+              <tr><td class="qnum">6</td><td>Followed game rules easily</td></tr>
+              <tr><td class="qnum">7</td><td>Picking a square was easy</td></tr>
+              <tr><td class="qnum">8</td><td>Knew how to play the game</td></tr>
+
+              <tr><th colspan="2" scope="colgroup" class="grouphdr">Perceived correctness</th></tr>
+              <tr><td class="qnum">9</td><td>Robot did the right thing after my turn</td></tr>
+
+              <tr><th colspan="2" scope="colgroup" class="grouphdr">Engagement</th></tr>
+              <tr><td class="qnum">10</td><td>Want to play with the robot again</td></tr>
+              <tr><td class="qnum">11</td><td>Robot helped me keep playing</td></tr>
+              <tr><td class="qnum">12</td><td>Felt good playing with the robot</td></tr>
+              <tr><td class="qnum">13</td><td>Game was fun</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Citation ------------------------------------------------------- -->
+    <section id="bibtex">
+      <div class="wrap">
+        <h2>Citation</h2>
+        <p class="lead">
+          The paper is currently under double-blind review. A full citation
+          will be provided upon publication; an anonymized entry is given below.
+        </p>
+        <div class="bibtex-box">
+          <button class="copy-btn" type="button" data-copy-target="#bibtex-code">Copy</button>
+          <pre id="bibtex-code">@misc{dirt2026,
+  title  = {DIRT: Data-Integrated Robot Therapy for Real-Time Gameplay
+            Interaction, Supervision, and Multimodal Session Management},
+  author = {Anonymous Author(s)},
+  year   = {2026},
+  note   = {Under double-blind review}
+}</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer ----------------------------------------------------------- -->
+  <footer class="footer">
+    <div class="wrap">
+      <p><strong>DIRT</strong> — Data-Integrated Robot Therapy</p>
+      <p>Under double-blind review. Source code to be released upon publication.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.getElementById('nav-links');
+      if (toggle && links) {
+        toggle.addEventListener('click', function () {
+          var open = links.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+        links.addEventListener('click', function (e) {
+          if (e.target.tagName === 'A') {
+            links.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+    })();
+
+    // Fade-in on scroll (skipped when reduced motion is preferred)
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.fade-in');
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function (el) { obs.observe(el); });
+    })();
+
+    // Copy BibTeX to clipboard
+    (function () {
+      var btn = document.querySelector('.copy-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var target = document.querySelector(btn.getAttribute('data-copy-target'));
+        if (!target) return;
+        var text = target.textContent;
+        var done = function () {
+          var old = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = old; }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(done);
+        } else {
+          var sel = window.getSelection(), range = document.createRange();
+          range.selectNodeContents(target);
+          sel.removeAllRanges(); sel.addRange(range);
+          try { document.execCommand('copy'); } catch (e) {}
+          sel.removeAllRanges();
+          done();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
